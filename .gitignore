@@ -1,0 +1,12 @@
+/.gitignore~
+/EntriesHandling.depend
+/EntriesHandling.depend~
+/EntriesHandling.layout
+/EntriesHandling.layout~
+/EntriesHandling.cbp
+/EntriesHandling.cbp~
+/libEntriesHandling.a
+/libEntriesHandling.a~
+/Makefile~
+/bin/*
+/obj/*
