@@ -8,9 +8,17 @@ CompleteID::CompleteID() : notary(0), id(0), timeStamp(0)
 {
 }
 
+void CompleteID::resetTo(CompleteID otherId)
+{
+    notary = otherId.notary;
+    id = otherId.id;
+    timeStamp = otherId.timeStamp;
+    underlyingStr.clear();
+}
+
 bool CompleteID::loadFromHex(string &str)
 {
-    underlyingStr="";
+    underlyingStr.clear();
     if (str.length() != 40) return false;
     string str2;
     if (!u.fromHex(str, str2)) return false;
@@ -44,7 +52,7 @@ CompleteID::CompleteID(string &str) : notary(0), id(0), timeStamp(0)
 
 bool CompleteID::loadFrom20Char(string &str)
 {
-    underlyingStr="";
+    underlyingStr.clear();
     if (str.length() != 20) return false;
     // get time stamp
     string dum = u.flip(str.substr(0,8));
@@ -63,7 +71,7 @@ string CompleteID::to20Char()
 {
     if (underlyingStr.length()!=20)
     {
-        underlyingStr="";
+        underlyingStr.clear();
         underlyingStr.append(u.flip(u.UllAsByteSeq(timeStamp)));
         underlyingStr.append(u.flip(u.UlAsByteSeq(notary)));
         underlyingStr.append(u.flip(u.UllAsByteSeq(id)));
@@ -90,15 +98,15 @@ CompleteID::~CompleteID()
 {
 }
 
-CompleteID CompleteID::maximum(CompleteID id)
+CompleteID CompleteID::maximum(CompleteID otherId)
 {
-    if (*this <= id) return id;
+    if (*this <= otherId) return otherId;
     return *this;
 }
 
-CompleteID CompleteID::minimum(CompleteID id)
+CompleteID CompleteID::minimum(CompleteID otherId)
 {
-    if (*this >= id) return id;
+    if (*this >= otherId) return otherId;
     return *this;
 }
 

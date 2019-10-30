@@ -15,13 +15,14 @@ public:
     CompleteID(unsigned long n, unsigned long long i,  unsigned long long t);
     CompleteID(string &str);
     ~CompleteID();
-    CompleteID maximum(CompleteID id);
-    CompleteID minimum(CompleteID id);
+    CompleteID maximum(CompleteID otherId);
+    CompleteID minimum(CompleteID otherId);
     unsigned long getNotary();
     unsigned long long getTimeStamp();
     string to20Char();
     string toHex();
     string to27Char();
+    void resetTo(CompleteID otherId);
     bool isZero();
     bool operator==(const CompleteID& rhs)
     {
@@ -91,9 +92,9 @@ protected:
 private:
     Util u;
     CompareIDs cmp;
-    unsigned long notary;
-    unsigned long long id;
-    unsigned long long timeStamp;
+    volatile unsigned long notary;
+    volatile unsigned long long id;
+    volatile unsigned long long timeStamp;
     string underlyingStr;
     bool loadFrom20Char(string &str);
     bool loadFromHex(string &str);

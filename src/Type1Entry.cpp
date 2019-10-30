@@ -42,7 +42,7 @@ bool Type1Entry::createFromString(string &str)
             deleteData();
             return false;
         }
-        unsigned long keyLengths[lineage->maxActing];
+        unsigned long* keyLengths = new unsigned long[lineage->maxActing];
         unsigned long totalKeysLength = 0;
         for (unsigned short i=0; i<lineage->maxActing; i++)
         {
@@ -72,6 +72,7 @@ bool Type1Entry::createFromString(string &str)
             lineage->keyStrings.push_back(t);
             pos+=keyLengths[i];
         }
+        delete[] keyLengths;
         if (len-pos < 48)
         {
             delete lineage;

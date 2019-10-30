@@ -12,25 +12,25 @@ TNtrNr::TNtrNr(string str)
     strcpy(cstr, str.c_str());
     if (cstr[0] != '(')
     {
-        delete cstr;
+        delete[] cstr;
         return;
     }
     if (cstr[str.length()-1] != ')')
     {
-        delete cstr;
+        delete[] cstr;
         return;
     }
     size_t pos = str.find(",");
     if (pos == string::npos)
     {
-        delete cstr;
+        delete[] cstr;
         return;
     }
     string lineageStr = str.substr(1, pos-1);
     string notaryNrStr = str.substr(pos+1, str.length()-2-pos);
     lineage = stoul(lineageStr);
     notaryNr = stoul(notaryNrStr);
-    delete cstr;
+    delete[] cstr;
 }
 
 TNtrNr::TNtrNr(unsigned short l, unsigned long n) : lineage(l), notaryNr(n)
