@@ -53,6 +53,7 @@ bool Type1Entry::createFromString(string &str)
         }
         if (len-pos < totalKeysLength)
         {
+            delete[] keyLengths;
             delete lineage;
             deleteData();
             return false;
@@ -63,6 +64,7 @@ bool Type1Entry::createFromString(string &str)
 
             if (keyStringsAll.count(t)>0)
             {
+                delete[] keyLengths;
                 delete lineage;
                 deleteData();
                 return false;
